@@ -26,12 +26,12 @@ spring:
             password: ${REDIS_PASSWORD:""}
     r2dbc:
         # 需要手动创建数据库,启动会自动创建表,修改了配置easyorm相关配置也要修改
-        url: r2dbc:postgresql://${DB_HOST:127.0.0.1}:${DB_PORT:5432}/${DB_DATABASE:jetlinks}
+        # url: r2dbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:5432}/${DB_DATABASE:jetlinks}
         # 如果需要切换为mysql,请同时禁用timescaledb.enabled=false或者单独配置timescaledb.r2dbc.url
         # 如果需要使用elasticsearch,请勾选es7x profile或者手动引入es依赖,具体在pom.xml搜索es7x.并配置elasticsearch相关配置
         # 数据库说明: https://hanta.yuque.com/px7kg1/dev/tw77qae6b08bcdfh
         # 注意:切换了数据库easyorm相关配置也要修改
-        # url: r2dbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_DATABASE}?ssl=false&serverZoneId=Asia/Shanghai
+        url: r2dbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_DATABASE}?ssl=false&serverZoneId=Asia/Shanghai
         username: ${DB_USERNAME:postgres}
         password: ${DB_PASSWORD:jetlinks}
         pool:
@@ -54,7 +54,7 @@ easyorm:
     dialect: ${DB_DIALECT:postgres} #数据库方言
 timescaledb:
     # 默认使用timescaledb来存储设备数据,如果使用mysql,需要设置为false或配置shared-spring为false以及r2dbc相关配置.
-    enabled: true
+    enabled: false
     shared-spring: true # 默认共享spring的连接
     #    r2dbc: # 这里仅支持timescaledb,请勿修改成其他数据库.
     #        url: r2dbc:postgresql://localhost:15432/jetlinks
